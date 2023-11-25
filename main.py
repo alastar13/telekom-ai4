@@ -1,5 +1,4 @@
 import openai
-from openai import AsyncOpenAI
 import streamlit as st
 
 
