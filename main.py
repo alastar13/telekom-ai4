@@ -28,10 +28,7 @@ def main():
         response = openai.chat.completions.create(
             model="gpt-4",
             messages=[
-                {
-                    "role": "user",
-                    "content": st.session_state.messages,
-                },
+                st.session_state.messages[-1]
             ],
         )
         msg = response.choices[0].message
