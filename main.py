@@ -26,7 +26,7 @@ def main():
         st.session_state.messages.append({"role": "user", "content": prompt})
         st.chat_message("user").write(prompt)
         response = openai.chat.completions.create(
-            model="gpt-4-turbo",
+            model="gpt-4",
             messages=[
                 st.session_state.messages[-1]
             ],
