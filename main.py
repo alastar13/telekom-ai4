@@ -3,13 +3,6 @@ from openai import AsyncOpenAI
 import streamlit as st
 
 
-async def request():
-    client = AsyncOpenAI()
-    client.api_key = "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"
-    response = await client.chat.completions.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Hello world"}])
-    return response
-
-
 def main():
     with st.sidebar:
         openai_api_key = "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"
@@ -26,10 +19,18 @@ def main():
             st.info("Please add your OpenAI API key to continue.")
             st.stop()
 
-        openai.api_key = openai_api_key
+        openai.api_key = "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"
         st.session_state.messages.append({"role": "user", "content": prompt})
         st.chat_message("user").write(prompt)
-        response = request()
+        response = openai.chat.completions.create(
+            model="gpt-4",
+            messages=[
+                {
+                    "role": "user",
+                    "content": st.session_state.messages,
+                },
+            ],
+        )
         msg = response.choices[0].message
         st.session_state.messages.append(msg)
         st.chat_message("assistant").write(msg.content)
